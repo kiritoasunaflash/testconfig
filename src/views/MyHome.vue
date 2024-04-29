@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { emitter } from "@/utils/mitt.js";
 import { message } from 'ant-design-vue';
@@ -42,10 +42,12 @@ const gologin = () => {
 }
 const token = ref()
 onMounted(async () => {
-    emitter.on('getusername', (res) => {
-        localStorage.setItem('username', res)
-    })
     username.value = localStorage.getItem('username')
+    nextTick(() => {
+        emitter.on('getusername', (res) => {
+            localStorage.setItem('username', res)
+        })
+    })
     token.value = localStorage.getItem('token')
 })
 // 确定退出账号
