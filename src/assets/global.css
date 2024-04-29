@@ -1,0 +1,18 @@
+body {
+    background-color: #eef0f5;
+    /* 设置您想要的背景色 */
+    height: 100%;
+}
+
+html,
+#app {
+    height: calc(100% - 40px);
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+input:hover {
+    cursor: pointer;
+}
