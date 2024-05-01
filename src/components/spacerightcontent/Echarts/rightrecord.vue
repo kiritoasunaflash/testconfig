@@ -45,7 +45,7 @@ const pageSize = ref(10)
 const total = ref(props.rightData?.total)
 const resourcelist = ref([])
 const changeright = async () => {
-    let date = new Date(),
+    let date = Date.now(),
         year = date.getFullYear(), //获取完整的年份(4位)
         month = date.getMonth() + 1, //获取当前月份(0-11,0代表1月)
         strDate = date.getDate() // 获取当前日(1-31)

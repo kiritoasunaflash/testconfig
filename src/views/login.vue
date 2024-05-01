@@ -76,7 +76,7 @@
 
         </div>
     </div>
-    {{ data }}
+    {{ getMyToken }}
 </template>
 
 <script setup>
@@ -89,21 +89,24 @@ import { emitter } from "@/utils/mitt.js";
 import { userState } from '@/stores/userInfo';
 import { getOther } from '@/stores/other';
 // import { mapState, mapActions } from 'pinia'
-import { setToken, getToken } from '@/utils/cookie'
+import { setToken, getToken, removeToken } from '@/utils/cookie'
 const useStore = userState()
 const otherStore = getOther()
-const data = ref(0)
+const token = ref()
 onMounted(() => {
-    useStore
     otherStore
+    useStore.getTimer(Date.now())
     console.log(useStore.tokenTest);
     console.log(otherStore.time.value);
     console.log(getToken('token'));
 })
-computed(() => {
-    data.value = mapState(getOther, ['time'])
-})
 const router = useRouter()
+const getMyToken = computed(() => {
+    if (useStore.timer < 0) {
+        removeToken('token')
+    }
+    return token.value = getToken('token')
+})
 // 设置初始登录值为1，微信为1，邮箱为2
 let point = ref(1)
 const gologin = () => {

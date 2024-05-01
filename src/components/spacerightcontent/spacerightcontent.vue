@@ -381,7 +381,7 @@ const showEcharts = async (event, item) => {
     echartitem.value = item
     // EchartData.value = item
     // 获取日期
-    // let date = new Date(),
+    // let date = Date.now(),
     //     year = date.getFullYear(), //获取完整的年份(4位)
     //     month = date.getMonth() + 1, //获取当前月份(0-11,0代表1月)
     //     strDate = date.getDate() // 获取当前日(1-31)
