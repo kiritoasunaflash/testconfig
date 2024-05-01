@@ -79,11 +79,18 @@
 
 <script setup>
 import { InfoCircleOutlined } from '@ant-design/icons-vue';
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { regist, login } from '@/Api/regist'
 import { message } from 'ant-design-vue';
 import { useRouter } from 'vue-router'
 import { emitter } from "@/utils/mitt.js";
+import { userState } from '@/stores/userInfo';
+import { setToken, getToken } from '@/utils/cookie'
+const store = userState()
+onMounted(() => {
+    store
+    console.log(store);
+})
 const router = useRouter()
 // 设置初始登录值为1，微信为1，邮箱为2
 let point = ref(1)
