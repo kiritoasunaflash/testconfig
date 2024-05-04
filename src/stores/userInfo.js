@@ -1,27 +1,36 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { regist, login } from '@/Api/regist'
 import { setToken, getToken, removeToken } from '@/utils/cookie'
+
 export const userState = defineStore('userInfo', () => {
-  const tokenTest = ref(null)
-  tokenTest.value = '550e8400-e29b-41d4-a716-446655440000'
+  const tokenTest = ref('550e8400-e29b-41d4-a716-446655440000')
+  
+  // Immediately set the token upon store initialization
   setToken(tokenTest.value)
-  let timer = ref(null)
-  const getTimer = (time) => {
-    console.log(time)
-    let timeDate = null
-    setTimeout(() => {
-      timeDate = Date.now()
-      timer.value = time - timeDate
-      console.log(timer.value)
-    }, 1000)
-    console.log(timer.value)
-    if (timer.value < 0) {
-      removeToken('token')
-      console.log(getToken('token'), 20)
+
+  const timer = ref(null)
+
+  // Clear timer if it exists
+  const clearTimer = () => {
+    if (timer.value) {
+      clearTimeout(timer.value)
+      timer.value = null
     }
   }
 
-  console.log(getToken('token'), 23)
-  return { tokenTest, getTimer, timer }
+  const setTimer = (expirationTime) => {
+    clearTimer() // Clear existing timer before setting a new one
+
+    timer.value = setTimeout(() => {
+      const currentTime = Date.now()
+      const timeLeft = expirationTime - currentTime
+
+      if (timeLeft < 0) {
+        removeToken('token')
+        console.log('Token removed:', getToken('token'))
+      }
+    }, 1000)
+  }
+
+  return { tokenTest, setTimer }
 })
