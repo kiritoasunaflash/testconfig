@@ -25,8 +25,7 @@ export const useCounterStore = defineStore('counter', () => {
     }
     return quickSort(left).concat([middle], quickSort(right))
   }
-
+  console.log('this is pop')
+  console.log('nonon')
   return { count, doubleCount, increment }
 })
-
-// hello 我修改了这里
