@@ -73,18 +73,40 @@
             <div class="button" @click="getregist">
                 <a-button>注册</a-button>
             </div>
+
         </div>
     </div>
+    {{ getMyToken }}
 </template>
 
 <script setup>
 import { InfoCircleOutlined } from '@ant-design/icons-vue';
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted, computed } from 'vue'
 import { regist, login } from '@/Api/regist'
 import { message } from 'ant-design-vue';
 import { useRouter } from 'vue-router'
 import { emitter } from "@/utils/mitt.js";
+import { userState } from '@/stores/userInfo';
+import { getOther } from '@/stores/other';
+// import { mapState, mapActions } from 'pinia'
+import { setToken, getToken, removeToken } from '@/utils/cookie'
+const useStore = userState()
+const otherStore = getOther()
+const token = ref()
+onMounted(() => {
+    otherStore
+    useStore.getTimer(Date.now())
+    console.log(useStore.tokenTest);
+    console.log(otherStore.time.value);
+    console.log(getToken('token'));
+})
 const router = useRouter()
+const getMyToken = computed(() => {
+    if (useStore.timer < 0) {
+        removeToken('token')
+    }
+    return token.value = getToken('token')
+})
 // 设置初始登录值为1，微信为1，邮箱为2
 let point = ref(1)
 const gologin = () => {
