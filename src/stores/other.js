@@ -13,5 +13,6 @@ export const getOther = defineStore('otherStore', () => {
   })
   console.log('this time?')
   console.log('22:05')
+  console.log('ababa')
   return { time }
 })
