@@ -4,7 +4,7 @@ import { setToken, getToken, removeToken } from '@/utils/cookie'
 
 export const userState = defineStore('userInfo', () => {
   const tokenTest = ref('550e8400-e29b-41d4-a716-446655440000')
-  
+
   // Immediately set the token upon store initialization
   setToken(tokenTest.value)
 
@@ -31,6 +31,6 @@ export const userState = defineStore('userInfo', () => {
       }
     }, 1000)
   }
-
+  //aha
   return { tokenTest, setTimer }
 })
