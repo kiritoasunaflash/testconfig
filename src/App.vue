@@ -2,7 +2,7 @@
 console.log(window.location.host);
 let Env_hangyequan = '192.168.236.1:5173'
 let Env_laoqiu = '192.168.137.1:5173'
-
+console.log(1111);
 </script>
 
 <template>
