@@ -27,5 +27,6 @@ export const useCounterStore = defineStore('counter', () => {
   }
   console.log('this is pop')
   console.log('nonon')
+  console.log('lala')
   return { count, doubleCount, increment }
 })
