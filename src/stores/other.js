@@ -11,5 +11,8 @@ export const getOther = defineStore('otherStore', () => {
   time.value = computed(() => {
     return (time.value = Date.now())
   })
+  console.log('this time?')
+  console.log('22:05')
+  console.log('ababa')
   return { time }
 })
